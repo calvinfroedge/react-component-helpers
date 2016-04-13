@@ -1,6 +1,6 @@
 import expect from 'expect'
 import jsdom from 'mocha-jsdom'
-import { toggleState, trueState, falseState, bindMembersToClass, bindFunctionsAsInstanceMethods } from '../src'
+import { toggleState, trueState, falseState, bindMembersToClass, bindFunctionsAsInstanceMethods, incStateValue, decStateValue } from '../src'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
@@ -10,10 +10,11 @@ class TestComponent extends React.Component {
     super(props);
 
     this.state = {
-      foo: false 
+      foo: false,
+      bar: 1
     }
 
-    bindFunctionsAsInstanceMethods(this, toggleState, trueState, falseState);
+    bindFunctionsAsInstanceMethods(this, toggleState, trueState, falseState, incStateValue, decStateValue);
   }
 
   render(){
@@ -42,5 +43,14 @@ describe('state-helpers', ()=>{
     expect(component.state.foo).toBe(false);
     TestUtils.Simulate.click(component.refs.toggle);   
     expect(component.state.foo).toBe(true);
+  });
+
+  it('Should increment and decrement state value', ()=>{
+    var React = require('react');
+    component = TestUtils.renderIntoDocument(<TestComponent />);
+    component.incStateValue('bar');
+    expect(component.state.bar).toBe(2);
+    component.decStateValue('bar');
+    expect(component.state.bar).toBe(1);
   });
 })

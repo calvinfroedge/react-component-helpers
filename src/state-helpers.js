@@ -25,3 +25,19 @@ export function trueState(key, event){
 export function falseState(key, event){
   finish.call(this, key, false, event);
 }
+
+/**
+ * Increment a state value
+ */
+export function incStateValue(key, event){
+  let value = this.state[key] + 1;
+  finish.call(this, key, value, event);
+}
+
+/**
+ * Decrement a state value
+ */
+export function decStateValue(key, event){
+  let value = this.state[key] - 1;
+  finish.call(this, key, value, event);
+}
