@@ -30,6 +30,8 @@ constructor(props){
 
 ## State Helpers
 
+### Boolean Helpers
+
 These functions allow you to remove boilerplate methods like this from your code:
 
 ```
@@ -63,6 +65,10 @@ In render...
 <a href="#" onClick={this.toggleState.bind(0, 'canSubmitForm')}>Toggle enable form</a>
 <a href="#" onClick={this.toggleState.bind(0, 'canDoOtherThing')}>Toggle enable other thing</a>
 ```
+
+### Increment / Decrement Helpers
+
+Use `incStateValue` and `decStateValue` to add 1 or decrease 1 of the value of given state key.
 
 ## Prop Helpers
 
