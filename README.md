@@ -2,22 +2,8 @@
 
 A collection of helper methods to remove boilerplate code from your React Components.
 
-## Autobind to Classes
+## Instance Binding Helpers
 
-These helpers prevent you from writing code like this:
-
-```
-this.foo = ::this.foo;
-this.bar = ::this.bar;
-this.baz = ::this.baz'
-```
-
-...Or this:
-
-```
-this.foo = importedFoo.bind(this);
-this.bar = importedBar.bind(this);
-```
 ### bindMembersToClass(that, members)
 
 Take some methods that already exist on the class, and bind `this` to them:
