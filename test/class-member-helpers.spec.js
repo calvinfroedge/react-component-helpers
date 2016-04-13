@@ -1,10 +1,15 @@
 import expect from 'expect'
 import jsdom from 'mocha-jsdom'
-import { bindMembersToClass, bindFunctionsAsInstanceMethods } from '../src'
+import { mixin, bindMembersToClass, bindFunctionsAsInstanceMethods } from '../src'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
 
+let mixme = {
+  testMix: function(){
+    this.setState({mix: true});
+  }
+}
 
 let bar = function(){
   this.setState({foo: false});
@@ -20,6 +25,7 @@ class TestComponent extends React.Component {
 
     bindMembersToClass(this, 'foo');
     bindFunctionsAsInstanceMethods(this, bar);
+    mixin(this, mixme);
   }
 
   foo(){
@@ -43,12 +49,14 @@ describe('props-helpers', ()=>{
   })
 
   //Assertions
-  it('Should should', ()=>{
+  it('Should do correct bindings', ()=>{
     expect(component.foo).toExist();
     expect(component.bar).toExist();
     component.foo();
     expect(component.state.foo).toBe(true);
     component.bar();
     expect(component.state.foo).toBe(false);
+    component.testMix();
+    expect(component.state.mix).toBe(true);
   });
 })

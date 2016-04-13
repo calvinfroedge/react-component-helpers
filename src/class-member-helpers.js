@@ -1,4 +1,13 @@
 /**
+ * Take another object, and mix it into a react class instance
+ */
+export function mixin(instance, mix){
+  for(var key in mix){
+    instance[key] = mix[key].bind(instance);
+  }
+}
+
+/**
  * Takes existing class members, and bind them 
  */
 export function bindMembersToClass(that, ...members){
