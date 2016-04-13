@@ -6,7 +6,10 @@ import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
 
 let mixme = {
-  testMix: function(){
+  constructor(props){
+    this.state.mixConstructed = true;
+  },
+  testMix(){
     this.setState({mix: true});
   }
 }
@@ -58,5 +61,6 @@ describe('props-helpers', ()=>{
     expect(component.state.foo).toBe(false);
     component.testMix();
     expect(component.state.mix).toBe(true);
+    expect(component.state.mixConstructed).toBe(true);
   });
 })

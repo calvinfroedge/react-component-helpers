@@ -1,17 +1,22 @@
 /**
- * Take another object, and mix it into a react class instance
+ * Take one or objects, and mix into a react class instance
  */
-export function mixin(instance, mix){
-  for(var key in mix){
-    instance[key] = mix[key].bind(instance);
-  }
+export function mixin(instance, ...mixins){
+  mixins.forEach((mix)=>{
+    for(var key in mix){
+      if(key == 'constructor') continue;
+      instance[key] = mix[key].bind(instance);
+    }
+
+    if(mix.constructor) mix.constructor.call(instance, instance.props);
+  });
 }
 
 /**
  * Takes existing class members, and bind them 
  */
 export function bindMembersToClass(that, ...members){
-  members.map((item)=>{
+  members.forEach((item)=>{
     that[item] = that[item].bind(that);
   });
 }

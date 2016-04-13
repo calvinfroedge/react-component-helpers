@@ -4,23 +4,6 @@ A collection of helper methods to remove boilerplate code from your React Compon
 
 ## Instance Binding Helpers
 
-### mixin(that, other)
-
-Bind another object to the same `this`. This allows for mixin-like functionality which you can share between classes.
-
-```
-let mix = {
-  iDoneMixed: function(){
-    this.setState({'mixed': true});
-  }
-}
-...
-constructor(props){
-  super(props);
-  mixin(this, mix);
-}
-```
-
 ### bindMembersToClass(that, members)
 
 Take some methods that already exist on the class, and bind `this` to them:
@@ -44,6 +27,28 @@ constructor(props){
   bindFunctionsAsInstanceMethods(this, foo, bar, baz);
 }
 ```
+
+### mixin(that, other)
+
+Bind another object to the same `this`. This allows for mixin-like functionality which you can share between classes.
+
+```
+let mix = {
+  constructor(){
+    this.state.constructorMixed = true;
+  },
+  iDoneMixed(){
+    this.setState({'mixed': true});
+  }
+}
+...
+constructor(props){
+  super(props);
+  mixin(this, mix);
+}
+```
+
+You can add 1 or more mixes to `mixin`. As in the example, if you provide a constructor key on the object you pass to `mixin`, it will be called with props when you call the mixin.
 
 ## State Helpers
 

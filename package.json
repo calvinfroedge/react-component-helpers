@@ -1,6 +1,6 @@
 {
   "name": "react-component-helpers",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "More expressive react components",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
